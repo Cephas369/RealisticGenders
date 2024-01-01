@@ -13,7 +13,7 @@ namespace RealisticGenders.Models
         {
             float baseValue = base.CalculateDamage(in attackInformation, in collisionData, in weapon, baseDamage);
             MissionWeapon attackWeapon = weapon;
-            if (attackInformation.AttackerAgentCharacter?.IsFemale == true && !attackWeapon.IsAnyAmmo() && !attackWeapon.IsAnyConsumable())
+            if (attackInformation.AttackerAgent?.IsFemale == true && !attackWeapon.IsAnyAmmo() && !attackWeapon.IsAnyConsumable())
                 return baseValue * 0.6f;
             return baseValue;
         }
