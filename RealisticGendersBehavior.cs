@@ -27,7 +27,7 @@ namespace RealisticGenders
     {
         private bool UpdatedHeroGenders = false;
         private List<Occupation> _onlyMaleOccupations;
-        //Old value still in use because if removed saves that used it will crash
+        //Old value still in use because if removed, saves that used it will crash
         private Occupation[] onlyMaleOccupations;
         
         public static RealisticGendersBehavior? Instance;
@@ -51,7 +51,7 @@ namespace RealisticGenders
                 Hero spouse = lady.Spouse;
                 bool haveFather = father != null && !father.IsDead;
                 bool haveSpouse = spouse != null && !spouse.IsDead;
-                bool siblingsOK = !siblings.Any((Hero x) => x.IsAlive && x.Age >= 16f && !x.IsFemale);
+                bool siblingsOK = !siblings.Any(x => x.IsAlive && x.Age >= 16f && !x.IsFemale);
                 if (!haveFather && siblingsOK && !haveSpouse)
                 {
                     return true;
@@ -73,7 +73,8 @@ namespace RealisticGenders
 
         private bool IsFemaleAndActiveParty(MobileParty party) => party?.IsMainParty == false && party.IsActive &&
                                                                   party.IsLordParty &&
-                                                                  party.LeaderHero?.IsFemale == true;
+                                                                  party.LeaderHero?.IsFemale == true &&
+                                                                  party.LeaderHero.IsAlive;
 
         public override void RegisterEvents()
         {
